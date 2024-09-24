@@ -287,7 +287,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1061, 491);
+            tabPage2.Size = new Size(1061, 413);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Grafica";
             tabPage2.UseVisualStyleBackColor = true;
@@ -320,15 +320,19 @@
             btnRegresar.Size = new Size(111, 70);
             btnRegresar.TabIndex = 18;
             btnRegresar.Text = "Regresar";
+            btnRegresar.TextImageRelation = TextImageRelation.ImageAboveText;
             btnRegresar.UseVisualStyleBackColor = true;
             // 
             // btndelete
             // 
+            btndelete.ImageKey = "Icono_Eliminar.png";
+            btndelete.ImageList = ListaImagenes;
             btndelete.Location = new Point(448, 568);
             btndelete.Name = "btndelete";
             btndelete.Size = new Size(111, 70);
             btndelete.TabIndex = 20;
             btndelete.Text = "Eliminar";
+            btndelete.TextImageRelation = TextImageRelation.ImageAboveText;
             btndelete.UseVisualStyleBackColor = true;
             // 
             // ListaImagenes
