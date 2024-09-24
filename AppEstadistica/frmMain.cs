@@ -13,6 +13,8 @@ namespace AppEstadistica
     public partial class frmMain : Form
     {
         public int Cantidad;
+        public string EjeX;
+        public string EjeY;
         public frmMain()
         {
             InitializeComponent();
@@ -23,8 +25,10 @@ namespace AppEstadistica
             //agregar excepcion aca pls
             try
             {
+                EjeX = txtVar1.ToString();
+                EjeY = txtVar2.ToString();
                 Cantidad = int.Parse(txtCantidad.Text);
-                frmDatos frmDatos = new frmDatos(Cantidad);
+                frmDatos frmDatos = new frmDatos(Cantidad, EjeX, EjeY);
                 frmDatos.ShowDialog();
             }
             catch (Exception)
@@ -46,6 +50,11 @@ namespace AppEstadistica
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MathNet.Numerics.Distributions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace Entidades
         double Rcuadrado = 0;
         double chi = 0;
         double t = 0;
+        double tCritical = 0;
+        double intervalo = 0;
 
         public double     b1( double Sumxy, double sumx, double sumy, double sumx2, int n )
         {
@@ -67,7 +70,38 @@ namespace Entidades
             t = (B1) / (Math.Sqrt(MCE/chi));
             return t;
         }
-       
+        public void Intervalos(bool chek, int N)
+        {
+            if (chek)
+            {
+                try
+                {
+                    double alpha = 1 - 0.99;
+                    tCritical = StudentT.InvCDF(0, 1, N - 2, 1 - alpha / 2);
+                    intervalo = tCritical * (Math.Sqrt(MCE / chi));
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+            else
+            {
+
+                double alpha = 1 - 0.95;
+                tCritical = StudentT.InvCDF(0, 1, N - 2, 1 - alpha / 2);
+                intervalo = tCritical * (Math.Sqrt(MCE / chi));
+            }
+        }
+            public double IntervaloMin()
+        {
+            return B1 - intervalo;
+        }
+        public double IntervaloMax()
+        {
+            return B1 + intervalo;
+        }
 
 
 

@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 
 namespace AppEstadistica
@@ -19,10 +20,11 @@ namespace AppEstadistica
     {
         private int NFilas;
 
-        public frmDatos(int Cantidad)
+        public frmDatos(int Cantidad, string variable1, string variable2)
         {
             InitializeComponent();
             NFilas = Cantidad;
+
 
             dgvDatos.Rows.Add(NFilas);
             tabControl1.TabPages[2].Enabled = false;
@@ -50,14 +52,32 @@ namespace AppEstadistica
         {
         }
 
+        private void ValidarDatagrid()
+        {
+            foreach (DataGridViewRow row in dgvDatos.Rows)
+            {
+                for (int i = 0; i <= 1; i++)
+                {
+                    if (row.Cells[i].Value == null || string.IsNullOrWhiteSpace(row.Cells[i].Value.ToString()))
+                    {
+                        MessageBox.Show("Por favor, rellene todos los campos vacíos");
+                        return;
+                    }
+                }
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
+            ValidarDatagrid();
+            Calculos calculos = new Calculos();
+            DialogResult resultd = MessageBox.Show("¿El programa va dirigido al area medicinal?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            bool Respuesta = (resultd == DialogResult.Yes);
+            calculos.Intervalos(Respuesta, NFilas);
             double SumaX = 0;
             double SumaY = 0;
             double SumaXCuadrado = 0;
             double SumaYCuadrado = 0;
             double SumaXY = 0;
-            Calculos calculos = new Calculos();
             for (int i = 0; i < dgvDatos.Rows.Count; i++)
             {
 
@@ -84,8 +104,7 @@ namespace AppEstadistica
                     SumaXY = SumaXY + ResultadoXY;
                     dgvDatos.Rows[i].Cells[4].Value = ResultadoXY;
                 }
-                tabControl1.TabPages[2].Enabled = true; 
-                tabControl1.TabPages[1].Enabled = true; 
+
 
             }
 
@@ -97,23 +116,14 @@ namespace AppEstadistica
             Rcuadradotxt.Text = Convert.ToString((Math.Truncate(calculos.R2() * 10000)) / 10000);
             Rtxt.Text = Convert.ToString((Math.Truncate(calculos.R() * 10000)) / 10000);
             Ttxt.Text = Convert.ToString((Math.Truncate(calculos.t_student() * 10000)) / 10000);
-
-            //int rowCount = dgvDatos.Rows.Count;
-            //int ColumnCount = dgvDatos.Columns.Count;
-
-            //double[] X = new double[rowCount];
-            //double[] Y = new double[ColumnCount];
-
-            //for (int i = 0; i < rowCount; i++)
-            //{
-            //    X[i] = double.Parse(dgvDatos.Rows[i].Cells[0].Value?.ToString());
-
-            //    Y[i] = double.Parse(dgvDatos.Rows[i].Cells[2].Value?.ToString());
-            //}
-
-            tabPage2.Enabled = true;
-            tabPage3.Enabled = true;
+            //calculos.Intervalos(checkBox2.Checked);
+            txtMax.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMax() * 10000)) / 10000);
+            txtMin.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMin() * 10000)) / 10000);
         }
+
+
+
+
 
 
 
@@ -160,11 +170,7 @@ namespace AppEstadistica
 
         }
 
-        private void tabpage3_Selected(object sender, TabControlEventArgs e)
-        {
 
-
-        }
 
         private void frmDatos_Load(object sender, EventArgs e)
         {
@@ -179,12 +185,22 @@ namespace AppEstadistica
                 int rowCount = dgvDatos.Rows.Count;
                 double[] X = new double[rowCount];
                 double[] Y = new double[rowCount];
+                ValidarDatagrid();
 
                 for (int i = 0; i < rowCount; i++)
                 {
-                    X[i] = double.Parse(dgvDatos.Rows[i].Cells[0].Value?.ToString());
+                    try
+                    {
 
-                    Y[i] = double.Parse(dgvDatos.Rows[i].Cells[1].Value?.ToString());
+                        X[i] = double.Parse(dgvDatos.Rows[i].Cells[0].Value?.ToString());
+
+                        Y[i] = double.Parse(dgvDatos.Rows[i].Cells[1].Value?.ToString());
+                    }
+                    catch (Exception ex)
+                    {
+
+                        throw;
+                    }
                 }
 
                 var sp = formsPlot1.Plot.Add.Scatter(X, Y);
@@ -203,6 +219,26 @@ namespace AppEstadistica
 
                 formsPlot1.Plot.Add.Line(Reg1, Reg2);
                 formsPlot1.Plot.Title(reg.FormulaWithRSquared);
+                tabControl1.TabPages[1].Enabled = true; 
+                tabControl1.TabPages[2].Enabled = true; 
+
+           
+                tabControl1.SelectedIndex = 1;
+
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl1.SelectedIndex == 1 && !tabControl1.TabPages[1].Enabled)
+            {
+                tabControl1.SelectedIndex = 0; // Regresar a la primera pestaña
+                MessageBox.Show("Por favor, complete la informacion.");
+            }
+            else if (tabControl1.SelectedIndex == 2 && !tabControl1.TabPages[2].Enabled)
+            {
+                tabControl1.SelectedIndex = 0; // Regresar a la primera pestaña
+                MessageBox.Show("Por favor, complete la informacion.");
             }
         }
     }

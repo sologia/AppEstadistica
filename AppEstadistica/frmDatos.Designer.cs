@@ -44,6 +44,11 @@
             ListaImagenes = new ImageList(components);
             btnRegresar = new Button();
             tabPage3 = new TabPage();
+            richTextBox1 = new RichTextBox();
+            txtMin = new TextBox();
+            txtMax = new TextBox();
+            label8 = new Label();
+            label7 = new Label();
             lblAnalisisb1 = new Label();
             label4 = new Label();
             Ttxt = new TextBox();
@@ -159,8 +164,9 @@
             tabControl1.Location = new Point(12, 86);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1069, 536);
+            tabControl1.Size = new Size(780, 536);
             tabControl1.TabIndex = 18;
+            tabControl1.SelectedIndexChanged += tabControl1_SelectedIndexChanged;
             tabControl1.Selected += tabControl1_Selected;
             // 
             // tabPage1
@@ -173,7 +179,7 @@
             tabPage1.Location = new Point(4, 29);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1061, 503);
+            tabPage1.Size = new Size(772, 503);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Datos";
             tabPage1.UseVisualStyleBackColor = true;
@@ -216,6 +222,11 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(richTextBox1);
+            tabPage3.Controls.Add(txtMin);
+            tabPage3.Controls.Add(txtMax);
+            tabPage3.Controls.Add(label8);
+            tabPage3.Controls.Add(label7);
             tabPage3.Controls.Add(lblAnalisisb1);
             tabPage3.Controls.Add(label4);
             tabPage3.Controls.Add(Ttxt);
@@ -232,24 +243,67 @@
             tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1061, 503);
+            tabPage3.Size = new Size(772, 503);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Calculos";
             tabPage3.UseVisualStyleBackColor = true;
             tabPage3.Click += tabPage3_Click;
             // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(270, 24);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(446, 283);
+            richTextBox1.TabIndex = 35;
+            richTextBox1.Text = "";
+            // 
+            // txtMin
+            // 
+            txtMin.Location = new Point(91, 400);
+            txtMin.Name = "txtMin";
+            txtMin.ReadOnly = true;
+            txtMin.Size = new Size(125, 27);
+            txtMin.TabIndex = 34;
+            // 
+            // txtMax
+            // 
+            txtMax.Location = new Point(91, 355);
+            txtMax.Name = "txtMax";
+            txtMax.ReadOnly = true;
+            txtMax.Size = new Size(125, 27);
+            txtMax.TabIndex = 33;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(16, 400);
+            label8.Name = "label8";
+            label8.Size = new Size(60, 20);
+            label8.TabIndex = 32;
+            label8.Text = "Minimo";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(16, 358);
+            label7.Name = "label7";
+            label7.Size = new Size(63, 20);
+            label7.TabIndex = 31;
+            label7.Text = "Maximo";
+            // 
             // lblAnalisisb1
             // 
             lblAnalisisb1.AutoSize = true;
-            lblAnalisisb1.Location = new Point(36, 99);
+            lblAnalisisb1.Location = new Point(26, 62);
             lblAnalisisb1.Name = "lblAnalisisb1";
-            lblAnalisisb1.Size = new Size(0, 20);
+            lblAnalisisb1.Size = new Size(99, 20);
             lblAnalisisb1.TabIndex = 30;
+            lblAnalisisb1.Text = "lbl analisis b1";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(571, 366);
+            label4.Location = new Point(16, 302);
             label4.Name = "label4";
             label4.Size = new Size(69, 20);
             label4.TabIndex = 29;
@@ -257,15 +311,16 @@
             // 
             // Ttxt
             // 
-            Ttxt.Location = new Point(545, 389);
+            Ttxt.Location = new Point(91, 299);
             Ttxt.Name = "Ttxt";
+            Ttxt.ReadOnly = true;
             Ttxt.Size = new Size(125, 27);
             Ttxt.TabIndex = 28;
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(591, 303);
+            label6.Location = new Point(16, 209);
             label6.Name = "label6";
             label6.Size = new Size(18, 20);
             label6.TabIndex = 27;
@@ -273,15 +328,16 @@
             // 
             // Rtxt
             // 
-            Rtxt.Location = new Point(545, 326);
+            Rtxt.Location = new Point(62, 209);
             Rtxt.Name = "Rtxt";
+            Rtxt.ReadOnly = true;
             Rtxt.Size = new Size(125, 27);
             Rtxt.TabIndex = 21;
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(399, 365);
+            label5.Location = new Point(16, 260);
             label5.Name = "label5";
             label5.Size = new Size(27, 20);
             label5.TabIndex = 26;
@@ -289,15 +345,16 @@
             // 
             // b1txt
             // 
-            b1txt.Location = new Point(82, 55);
+            b1txt.Location = new Point(62, 21);
             b1txt.Name = "b1txt";
+            b1txt.ReadOnly = true;
             b1txt.Size = new Size(92, 27);
             b1txt.TabIndex = 18;
             // 
             // txttt
             // 
             txttt.AutoSize = true;
-            txttt.Location = new Point(399, 302);
+            txttt.Location = new Point(16, 165);
             txttt.Name = "txttt";
             txttt.Size = new Size(36, 20);
             txttt.TabIndex = 25;
@@ -305,31 +362,33 @@
             // 
             // b0txt
             // 
-            b0txt.Location = new Point(390, 270);
+            b0txt.Location = new Point(62, 110);
             b0txt.Name = "b0txt";
-            b0txt.Size = new Size(125, 27);
+            b0txt.ReadOnly = true;
+            b0txt.Size = new Size(92, 27);
             b0txt.TabIndex = 19;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(399, 246);
+            label3.Location = new Point(16, 113);
             label3.Name = "label3";
-            label3.Size = new Size(26, 20);
+            label3.Size = new Size(44, 20);
             label3.TabIndex = 24;
-            label3.Text = "b0";
+            label3.Text = "b0 = ";
             // 
             // Rcuadradotxt
             // 
-            Rcuadradotxt.Location = new Point(390, 326);
+            Rcuadradotxt.Location = new Point(62, 162);
             Rcuadradotxt.Name = "Rcuadradotxt";
+            Rcuadradotxt.ReadOnly = true;
             Rcuadradotxt.Size = new Size(125, 27);
             Rcuadradotxt.TabIndex = 20;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(36, 58);
+            label2.Location = new Point(16, 24);
             label2.Name = "label2";
             label2.Size = new Size(40, 20);
             label2.TabIndex = 23;
@@ -338,8 +397,9 @@
             // 
             // RVtxt
             // 
-            RVtxt.Location = new Point(390, 389);
+            RVtxt.Location = new Point(62, 253);
             RVtxt.Name = "RVtxt";
+            RVtxt.ReadOnly = true;
             RVtxt.Size = new Size(125, 27);
             RVtxt.TabIndex = 22;
             // 
@@ -349,7 +409,7 @@
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1061, 503);
+            tabPage2.Size = new Size(772, 503);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Grafica";
             tabPage2.UseVisualStyleBackColor = true;
@@ -357,7 +417,7 @@
             // formsPlot1
             // 
             formsPlot1.DisplayScale = 1.25F;
-            formsPlot1.Location = new Point(335, 6);
+            formsPlot1.Location = new Point(200, 64);
             formsPlot1.Name = "formsPlot1";
             formsPlot1.Size = new Size(350, 350);
             formsPlot1.TabIndex = 0;
@@ -370,7 +430,7 @@
             panel_Titulo.Dock = DockStyle.Top;
             panel_Titulo.Location = new Point(0, 0);
             panel_Titulo.Name = "panel_Titulo";
-            panel_Titulo.Size = new Size(1089, 70);
+            panel_Titulo.Size = new Size(802, 70);
             panel_Titulo.TabIndex = 19;
             // 
             // lblDatos
@@ -388,7 +448,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1089, 628);
+            ClientSize = new Size(802, 628);
             Controls.Add(panel_Titulo);
             Controls.Add(tabControl1);
             Name = "frmDatos";
@@ -439,5 +499,10 @@
         private TextBox RVtxt;
         private Label lblAnalisisb1;
         private ScottPlot.WinForms.FormsPlot formsPlot1;
+        private TextBox txtMin;
+        private TextBox txtMax;
+        private Label label8;
+        private Label label7;
+        private RichTextBox richTextBox1;
     }
 }
