@@ -96,7 +96,7 @@ namespace AppEstadistica
             txtMax.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMax() * 10000)) / 10000);
             txtMin.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMin() * 10000)) / 10000);
 
-            //int rowCount = dgvDatos.Rows.Count;
+            //int rowCount = dgvDatos.Rows.Countxdxd;
             //int ColumnCount = dgvDatos.Columns.Count;
 
             //double[] X = new double[rowCount];
