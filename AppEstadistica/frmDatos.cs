@@ -92,6 +92,9 @@ namespace AppEstadistica
             Rcuadradotxt.Text = Convert.ToString((Math.Truncate(calculos.R2() * 10000)) / 10000);
             Rtxt.Text = Convert.ToString((Math.Truncate(calculos.R() * 10000)) / 10000);
             Ttxt.Text = Convert.ToString((Math.Truncate(calculos.t_student() * 10000)) / 10000);
+            calculos.Intervalos(checkBox2.Checked);
+            txtMax.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMax() * 10000)) / 10000);
+            txtMin.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMin() * 10000)) / 10000);
 
             //int rowCount = dgvDatos.Rows.Count;
             //int ColumnCount = dgvDatos.Columns.Count;
@@ -129,6 +132,11 @@ namespace AppEstadistica
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
 
         }

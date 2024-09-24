@@ -50,9 +50,13 @@
             label6 = new Label();
             Ttxt = new TextBox();
             label4 = new Label();
-            txtprueba = new TextBox();
+            txtMin = new TextBox();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            checkBox2 = new CheckBox();
+            label8 = new Label();
+            label7 = new Label();
+            txtMax = new TextBox();
             tabPage2 = new TabPage();
             panel_Titulo = new Panel();
             lblDatos = new Label();
@@ -239,12 +243,12 @@
             label4.TabIndex = 15;
             label4.Text = "t-student";
             // 
-            // txtprueba
+            // txtMin
             // 
-            txtprueba.Location = new Point(831, 69);
-            txtprueba.Name = "txtprueba";
-            txtprueba.Size = new Size(125, 27);
-            txtprueba.TabIndex = 17;
+            txtMin.Location = new Point(724, 119);
+            txtMin.Name = "txtMin";
+            txtMin.Size = new Size(125, 27);
+            txtMin.TabIndex = 17;
             // 
             // tabControl1
             // 
@@ -258,8 +262,12 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(checkBox2);
+            tabPage1.Controls.Add(label8);
+            tabPage1.Controls.Add(label7);
+            tabPage1.Controls.Add(txtMax);
             tabPage1.Controls.Add(dgvDatos);
-            tabPage1.Controls.Add(txtprueba);
+            tabPage1.Controls.Add(txtMin);
             tabPage1.Controls.Add(label1);
             tabPage1.Controls.Add(label4);
             tabPage1.Controls.Add(Ttxt);
@@ -282,12 +290,48 @@
             tabPage1.Text = "Datos";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // checkBox2
+            // 
+            checkBox2.AutoSize = true;
+            checkBox2.Location = new Point(902, 31);
+            checkBox2.Name = "checkBox2";
+            checkBox2.Size = new Size(102, 24);
+            checkBox2.TabIndex = 22;
+            checkBox2.Text = "Medico???";
+            checkBox2.UseVisualStyleBackColor = true;
+            checkBox2.CheckedChanged += checkBox2_CheckedChanged;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(767, 81);
+            label8.Name = "label8";
+            label8.Size = new Size(34, 20);
+            label8.TabIndex = 20;
+            label8.Text = "Min";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(946, 81);
+            label7.Name = "label7";
+            label7.Size = new Size(37, 20);
+            label7.TabIndex = 19;
+            label7.Text = "Max";
+            // 
+            // txtMax
+            // 
+            txtMax.Location = new Point(898, 119);
+            txtMax.Name = "txtMax";
+            txtMax.Size = new Size(125, 27);
+            txtMax.TabIndex = 18;
+            // 
             // tabPage2
             // 
             tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1061, 491);
+            tabPage2.Size = new Size(1061, 413);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Grafica";
             tabPage2.UseVisualStyleBackColor = true;
@@ -381,7 +425,7 @@
         private DataGridViewTextBoxColumn X_Cuadrado;
         private DataGridViewTextBoxColumn Y_Cuadrado;
         private DataGridViewTextBoxColumn XPORY;
-        private TextBox txtprueba;
+        private TextBox txtMin;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
@@ -390,5 +434,9 @@
         private Button btnRegresar;
         private Button btndelete;
         private ImageList ListaImagenes;
+        private TextBox txtMax;
+        private Label label8;
+        private Label label7;
+        private CheckBox checkBox2;
     }
 }
