@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using ScottPlot;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,6 +25,8 @@ namespace AppEstadistica
             NFilas = Cantidad;
 
             dgvDatos.Rows.Add(NFilas);
+            tabControl1.TabPages[2].Enabled = false;
+            tabControl1.TabPages[1].Enabled = false;
         }
 
         private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -81,6 +84,8 @@ namespace AppEstadistica
                     SumaXY = SumaXY + ResultadoXY;
                     dgvDatos.Rows[i].Cells[4].Value = ResultadoXY;
                 }
+                tabControl1.TabPages[2].Enabled = true; 
+                tabControl1.TabPages[1].Enabled = true; 
 
             }
 
@@ -106,31 +111,99 @@ namespace AppEstadistica
             //    Y[i] = double.Parse(dgvDatos.Rows[i].Cells[2].Value?.ToString());
             //}
 
-
+            tabPage2.Enabled = true;
+            tabPage3.Enabled = true;
         }
 
 
-        private void btnGrafico_Click(object sender, EventArgs e)
-        {
-            int rowCount = dgvDatos.Rows.Count;
-            int ColumnCount = dgvDatos.Columns.Count;
 
-            double[] X = new double[rowCount];
-            double[] Y = new double[rowCount];
-
-            for (int i = 0; i < rowCount; i++)
-            {
-                X[i] = double.Parse(dgvDatos.Rows[i].Cells[0].Value?.ToString());
-
-                Y[i] = double.Parse(dgvDatos.Rows[i].Cells[1].Value?.ToString());
-            }
-            frmGrafico frm = new frmGrafico(X, Y);
-            frm.ShowDialog();
-        }
 
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+
+        private void btndelete_Click_1(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("¿Estas seguro que quieres eliminar todos los datos?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (resultado == DialogResult.Yes)
+            {
+                foreach (DataGridViewRow row in dgvDatos.Rows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Value = "";
+                    }
+                }
+            }
+        }
+
+        private void btnRegresar_Click_1(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void formsPlot1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabpage3_Selected(object sender, TabControlEventArgs e)
+        {
+
+
+        }
+
+        private void frmDatos_Load(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void tabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            if (e.TabPage == tabPage3) // Verifica si estás en la página 3
+            {
+                int rowCount = dgvDatos.Rows.Count;
+                double[] X = new double[rowCount];
+                double[] Y = new double[rowCount];
+
+                for (int i = 0; i < rowCount; i++)
+                {
+                    X[i] = double.Parse(dgvDatos.Rows[i].Cells[0].Value?.ToString());
+
+                    Y[i] = double.Parse(dgvDatos.Rows[i].Cells[1].Value?.ToString());
+                }
+
+                var sp = formsPlot1.Plot.Add.Scatter(X, Y);
+                sp.LineWidth = 0;
+                sp.MarkerSize = 10;
+
+                ScottPlot.Statistics.LinearRegression reg = new(X, Y);
+
+                Coordinates Reg1 = new(X.First(), reg.GetValue(X.First()));
+                Coordinates Reg2 = new(Y.Last(), reg.GetValue(Y.Last()));
+
+                var line = formsPlot1.Plot.Add.Line(Reg1, Reg2);
+                line.MarkerSize = 0;
+                line.LineWidth = 2;
+                line.LinePattern = LinePattern.Dashed;
+
+                formsPlot1.Plot.Add.Line(Reg1, Reg2);
+                formsPlot1.Plot.Title(reg.FormulaWithRSquared);
+            }
         }
     }
 }
