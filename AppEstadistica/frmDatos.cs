@@ -72,7 +72,7 @@ namespace AppEstadistica
             Calculos calculos = new Calculos();
             DialogResult resultd = MessageBox.Show("¿El programa va dirigido al area medicinal?", "Pregunta", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             bool Respuesta = (resultd == DialogResult.Yes);
-            calculos.Intervalos(Respuesta, NFilas);
+            
             double SumaX = 0;
             double SumaY = 0;
             double SumaXCuadrado = 0;
@@ -117,6 +117,7 @@ namespace AppEstadistica
             Rtxt.Text = Convert.ToString((Math.Truncate(calculos.R() * 10000)) / 10000);
             Ttxt.Text = Convert.ToString((Math.Truncate(calculos.t_student() * 10000)) / 10000);
             //calculos.Intervalos(checkBox2.Checked);
+            calculos.Intervalos(Respuesta);
             txtMax.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMax() * 10000)) / 10000);
             txtMin.Text = Convert.ToString((Math.Truncate(calculos.IntervaloMin() * 10000)) / 10000);
         }

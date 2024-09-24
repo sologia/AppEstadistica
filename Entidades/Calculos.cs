@@ -70,9 +70,9 @@ namespace Entidades
             t = (B1) / (Math.Sqrt(MCE/chi));
             return t;
         }
-        public void Intervalos(bool chek, int N)
+        public void Intervalos(bool chek)
         {
-            if (chek)
+            if (chek==true)
             {
                 try
                 {
