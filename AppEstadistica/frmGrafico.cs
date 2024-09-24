@@ -35,7 +35,6 @@ namespace AppEstadistica
             sp.LineWidth = 0;
             sp.MarkerSize = 10;
 
-            //formsPlot1.Plot.Add.Scatter(EjeX, EjeY);
             ScottPlot.Statistics.LinearRegression reg = new(EjeX, EjeY);
 
             Coordinates Reg1 = new(EjeX.First(), reg.GetValue(EjeX.First()));

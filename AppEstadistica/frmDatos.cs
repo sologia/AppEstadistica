@@ -110,7 +110,7 @@ namespace AppEstadistica
         }
 
 
-    private void btnGrafico_Click(object sender, EventArgs e)
+        private void btnGrafico_Click(object sender, EventArgs e)
         {
             int rowCount = dgvDatos.Rows.Count;
             int ColumnCount = dgvDatos.Columns.Count;
@@ -126,6 +126,11 @@ namespace AppEstadistica
             }
             frmGrafico frm = new frmGrafico(X, Y);
             frm.ShowDialog();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

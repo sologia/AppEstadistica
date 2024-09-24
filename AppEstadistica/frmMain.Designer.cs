@@ -31,8 +31,8 @@
             label1 = new Label();
             txtCantidad = new MaskedTextBox();
             label2 = new Label();
-            richTextBox1 = new RichTextBox();
             button1 = new Button();
+            richTextBox1 = new RichTextBox();
             SuspendLayout();
             // 
             // label1
@@ -62,14 +62,6 @@
             label2.TabIndex = 2;
             label2.Text = "Pregunta del Enunciado";
             // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(220, 172);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(544, 153);
-            richTextBox1.TabIndex = 3;
-            richTextBox1.Text = "";
-            // 
             // button1
             // 
             button1.Location = new Point(48, 377);
@@ -79,6 +71,14 @@
             button1.Text = "Insertar Datos";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(220, 172);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(544, 153);
+            richTextBox1.TabIndex = 3;
+            richTextBox1.Text = "";
             // 
             // frmMain
             // 
@@ -102,7 +102,7 @@
         private Label label1;
         private MaskedTextBox txtCantidad;
         private Label label2;
-        private RichTextBox richTextBox1;
         private Button button1;
+        private RichTextBox richTextBox1;
     }
 }
